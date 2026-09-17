@@ -1,8 +1,7 @@
-# importing data reading and validation functions
+# Data reading and validation
 from .DataValidator import read_data, is_valid_day, get_valid_days
 
-
-# importing all metric calculation functions
+# Metric calculations
 from .Metrics import (
     calculate_tpi,
     calculate_aai,
@@ -15,9 +14,8 @@ from .Metrics import (
     calculate_tui,
     calculate_ei,
     calculate_dci,
-    calculate_pai
+    calculate_pai,
 )
 
-
-# importing the function used to generate activity insights
-from .Analysis import generate_insights
+# Analysis
+from .Analysis import  find_key_findings
