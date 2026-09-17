@@ -1,13 +1,23 @@
-from .DataValidator.excel_reader import read_data
-from .DataValidator.data_validator import is_valid_day, get_valid_days
+# importing data reading and validation functions
+from .DataValidator import read_data, is_valid_day, get_valid_days
 
-from .Metrics.tpi import calculate_tpi
-from .Metrics.aai import calculate_aai
-from .Metrics.phai import calculate_phai
-from .Metrics.sri import calculate_sri
-from .Metrics.abi import calculate_abi
-from .Metrics.tui import calculate_tui
-from .Metrics.ei import calculate_ei
-from .Metrics.dci import calculate_dci
 
-from .Analysis.insights import generate_insights
+# importing all metric calculation functions
+from .Metrics import (
+    calculate_tpi,
+    calculate_aai,
+    calculate_average_study,
+    calculate_average_class,
+    calculate_phai,
+    calculate_sri,
+    calculate_abi,
+    calculate_average_other_activities,
+    calculate_tui,
+    calculate_ei,
+    calculate_dci,
+    calculate_pai
+)
+
+
+# importing the function used to generate activity insights
+from .Analysis import generate_insights
