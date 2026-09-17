@@ -3,19 +3,22 @@ from PAI import (
     get_valid_days,
     calculate_tpi,
     calculate_aai,
+    calculate_average_study,
+    calculate_average_class,
     calculate_phai,
     calculate_sri,
     calculate_abi,
+    calculate_average_other_activities,
     calculate_tui,
     calculate_ei,
     calculate_dci,
-    generate_insights
+    calculate_pai
 )
 
 
 def main():
 
-    file_path = "Data/12620514.xlsx"
+    file_path = "12620514.xlsx"
 
     data = read_data(file_path)
 
@@ -32,35 +35,35 @@ def main():
     ei = calculate_ei(valid_days)
     dci = calculate_dci(valid_days, expected_days)
 
-    metrics = {
-        "TPI": tpi,
-        "AAI": aai,
-        "PhAI": phai,
-        "SRI": sri,
-        "ABI": abi,
-        "TUI": tui,
-        "EI": ei,
-        "DCI": dci
-    }
+    pai = calculate_pai(tpi, aai, phai, sri, tui, ei, dci)
 
-    insights = generate_insights(metrics)
+    average_study = calculate_average_study(valid_days)
+    average_class = calculate_average_class(valid_days)
+    average_other_activities = calculate_average_other_activities(valid_days)
 
-    print("\n===== PERSONAL ACTIVITY ANALYSIS =====")
 
-    print("Valid Days:", len(valid_days))
-    print("TPI:", round(tpi, 2), "min/day")
-    print("AAI:", round(aai, 2), "min/day")
-    print("PhAI:", round(phai, 2), "min/day")
-    print("SRI:", round(sri, 2), "min/day")
-    print("ABI:", round(abi, 2), "min/day")
-    print("TUI:", round(tui, 2), "min/day")
-    print("EI:", round(ei, 2), "/5")
-    print("DCI:", round(dci, 2), "%")
+    print("\n===== DAILY AVERAGES =====")
 
-    print("\n===== INSIGHTS =====")
+    print("Average Study:", round(average_study, 2), "min/day")
+    print("Average Class:", round(average_class, 2), "min/day")
+    print("Average Other Activities:", round(average_other_activities, 2), "min/day")
+    print("Average Coding:", round(tpi, 2), "min/day")
+    print("Average Fitness:", round(phai, 2), "min/day")
+    print("Average Sleep:", round(sri / 60, 2), "hours/day")
+    print("Average Free/Unaccounted Time:", round(abi, 2), "min/day")
 
-    for insight in insights:
-        print("-", insight)
+
+    print("\n===== INDEX VALUES =====")
+
+    print("Personal Activity Index (PAI):", round(pai, 2))
+    print("Tech Productivity Index (TPI):", round(tpi, 2), "min/day")
+    print("Academic Activity Index (AAI):", round(aai, 2), "min/day")
+    print("Physical Activity Index (PhAI):", round(phai, 2), "min/day")
+    print("Sleep & Recovery Index (SRI):", round(sri, 2), "min/day")
+    print("Activity Balance Index (ABI):", round(abi, 2), "min/day")
+    print("Time Utilization Index (TUI):", round(tui, 2), "min/day")
+    print("Experience Index (EI):", round(ei, 2), "/5")
+    print("Data Continuity Index (DCI):", round(dci, 2), "%")
 
 
 if __name__ == "__main__":
